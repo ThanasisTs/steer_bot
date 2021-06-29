@@ -115,6 +115,7 @@
     axle_offset="${axle_offset}"
     steer_height="${wheel_radius+steer_offset}">
   </xacro:front_wheel_lr>
+
   <xacro:front_wheel_lr
     name="front_left"
     parent="base"
@@ -149,9 +150,67 @@
     <origin xyz="${-base_length/2+axle_offset} ${+base_width/2+axle_offset} 0" rpy="${-90 * deg_to_rad} 0 0"/>
   </xacro:rear_wheel_lr>
 
+<!--   <joint name="laser_sensor_joint" type="fixed">
+      <origin xyz="0.2 0.0 ${base_height}" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="laser_sensor_link"/>
+  </joint>
+
+  <link name="laser_sensor_link">
+          <inertial>
+                  <mass value="1e-5"/>
+                  <origin xyz="0 0 0" rpy="0 0 0"/>
+                  <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+          </inertial>
+          <collision>
+                  <origin xyz="0 0 0" rpy="0 0 0"/>
+                  <geometry>
+                          <box size="0.1 0.1 0.1"/>
+                  </geometry>
+          </collision>
+          <visual>
+                  <origin xyz="0 0 0" rpy="0 0 0"/>
+                  <geometry>
+                          <cylinder radius="0.05" length="0.2"/>                        
+                  </geometry>
+          </visual>
+  </link> -->
+
   <!-- Colour -->
   <gazebo reference="base_link">
     <material>Gazebo/Green</material>
   </gazebo>
+
+<!--   <gazebo reference="laser_sensor_link">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/steer_bot/laser/scan</topicName>
+        <frameName>laser_sensor_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo> -->
 
 </robot>

@@ -2,7 +2,7 @@
 
     <arg name="model" default="$(find steer_bot_description)/urdf/steer_bot.urdf.xacro"/>
     <arg name="namespace" default="/steer_bot" />
-    <arg name="world_name" default="worlds/empty_world" />
+    <arg name="world_name" default="/home/thanasis/catkin_ws/src/steer_bot/steer_bot_gazebo/worlds/obstacles.world" />
     <arg name="gui" default="true" />
     <arg name="cmd_timeout" default="0.5"/>
     <arg name="x" default="0.0"/>
@@ -11,6 +11,7 @@
     <arg name="roll" default="0.0"/>
     <arg name="pitch" default="0.0"/>
     <arg name="yaw" default="0.0"/>
+    <arg name="cmd_vel" default="ackermann_steering_controller/cmd_vel"/>
 
     <group ns="$(arg namespace)">
 
@@ -44,7 +45,8 @@
             <param name="default_topic" value="$(arg namespace)/ackermann_steering_controller/cmd_vel"/>
         </node> -->
 
-        <node pkg="steer_bot_motion" type="keyboard_control.py" name="keyboard_control">
+        <node name="steer_bot_teleop" type="teleop_twist_keyboard.py" pkg="teleop_twist_keyboard">
+            <remap from="cmd_vel" to ="$(arg cmd_vel)"/>
         </node>
 
         <!-- Spawn robot in Gazebo -->

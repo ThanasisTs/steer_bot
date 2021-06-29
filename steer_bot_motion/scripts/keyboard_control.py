@@ -1,8 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import rospy
 from geometry_msgs.msg import Twist
 
-from pynput import keyboard
 import numpy as np
 import pygame as pg
 
@@ -10,7 +9,6 @@ if __name__ == "__main__":
 	rospy.init_node("keyboard_control")
 	pub = rospy.Publisher('/steer_bot/ackermann_steering_controller/cmd_vel', Twist, queue_size=10)
 	linear_vel, angular_vel = 0, 0
-	keys = [keyboard.Key.up, keyboard.Key.down, keyboard.Key.right, keyboard.Key.left]
 	
 	pg.init()
 	pg.display.set_mode((50, 50))
