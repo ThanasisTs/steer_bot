@@ -5,6 +5,8 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   roscpp
   rospy
+  nav_msgs
+  gazebo_msgs
 )
 
 catkin_package(

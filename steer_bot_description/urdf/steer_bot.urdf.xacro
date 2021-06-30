@@ -149,8 +149,8 @@
     wheel_mass="${wheel_mass}">
     <origin xyz="${-base_length/2+axle_offset} ${+base_width/2+axle_offset} 0" rpy="${-90 * deg_to_rad} 0 0"/>
   </xacro:rear_wheel_lr>
-
-<!--   <joint name="laser_sensor_joint" type="fixed">
+  
+  <joint name="laser_sensor_joint" type="fixed">
       <origin xyz="0.2 0.0 ${base_height}" rpy="0 0 0"/>
       <parent link="base_link"/>
       <child link="laser_sensor_link"/>
@@ -174,14 +174,14 @@
                           <cylinder radius="0.05" length="0.2"/>                        
                   </geometry>
           </visual>
-  </link> -->
+  </link>
 
   <!-- Colour -->
   <gazebo reference="base_link">
     <material>Gazebo/Green</material>
   </gazebo>
 
-<!--   <gazebo reference="laser_sensor_link">
+  <gazebo reference="laser_sensor_link">
     <sensor type="ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>
       <visualize>false</visualize>
@@ -211,6 +211,6 @@
         <frameName>laser_sensor_link</frameName>
       </plugin>
     </sensor>
-  </gazebo> -->
-
+  </gazebo>
+	  
 </robot>
