@@ -12,7 +12,8 @@
     <arg name="pitch" default="0.0"/>
     <arg name="yaw" default="0.0"/>
     <arg name="cmd_vel" default="ackermann_steering_controller/cmd_vel"/>
-
+    <arg name="teleop" default="false"/>
+    
     <group ns="$(arg namespace)">
 
         <!-- Gazebo  -->
@@ -42,9 +43,11 @@
 
 
         <!-- Keyboard teleoperation -->
-        <node name="steer_bot_teleop" type="teleop_twist_keyboard.py" pkg="teleop_twist_keyboard">
-            <remap from="cmd_vel" to ="$(arg cmd_vel)"/>
-        </node>
+        <group if="$(arg teleop)">
+            <node name="steer_bot_teleop" type="teleop_twist_keyboard.py" pkg="teleop_twist_keyboard">
+                <remap from="cmd_vel" to ="$(arg cmd_vel)"/>
+            </node>
+        </group>
 
         <!-- Static tf map ==> odom -->
         <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 1 map odom 100" />

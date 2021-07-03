@@ -3,13 +3,20 @@
 <launch>
 
 	<!-- Map server -->
-	<arg name="map_file" default="$(find steer_bot_navigation)/maps/map_edited.yaml"/>
+	<arg name="map_file" default="$(find steer_bot_navigation)/maps/map.yaml"/>
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
 	</node>
 
 	<!-- Move base node -->
-	<arg name="base_global_planner" default="navfn/NavfnROS"/>
-	<!-- <arg name="base_local_planner" default="dwa_local_planner/DWAPlannerROS"/> -->
+
+	<!-- Set the base_global_planner to navfn/NavfnROS for 
+		default ROS global planner or to SBPLLatticePlanner
+		for sbpl lattice global planner -->
+	<arg name="base_global_planner" default="SBPLLatticePlanner"/>
+
+	<!-- Set the base_local_planner to dwa_local_planner/DWAPlannerROS for 
+		default ROS global planner or to teb_local_planner/TebLocalPlannerROS
+		for teb local planner (used for ackermann steering / non-holonomic robots) -->
 	<arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS"/>
 
 
@@ -28,9 +35,13 @@
 
 		<!-- Local Planner -->
         <rosparam file="$(find steer_bot_navigation)/config/teb_local_planner_params.yaml" command="load" />
-
-        <!-- Global Planner -->
-        <rosparam file="$(find steer_bot_navigation)/config/global_planner_params.yaml" command="load"/>
+        
+        <!-- Navfn Global Planner params -->
+        <!-- <rosparam file="$(find steer_bot_navigation)/config/global_planner_params.yaml" command="load"/> -->
+        
+        <!-- SBPL Lattice Planner params -->
+ 		<param name="SBPLLatticePlanner/primitive_filename" value="$(find sbpl_lattice_planner)/matlab/mprim/pr2.mprim" /> 
+        <rosparam file="$(find steer_bot_navigation)/config/sbpl_lattice_planner_params.yaml" command="load"/>
 
 
 		<remap from="/cmd_vel" to="/steer_bot/ackermann_steering_controller/cmd_vel"/>
