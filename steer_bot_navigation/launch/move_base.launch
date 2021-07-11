@@ -3,7 +3,7 @@
 <launch>
 
 	<!-- Map server -->
-	<arg name="map_file" default="$(find steer_bot_navigation)/maps/map.yaml"/>
+	<arg name="map_file" default="$(find steer_bot_navigation)/maps/map_res_05.yaml"/>
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
 	</node>
 
@@ -19,6 +19,7 @@
 		for teb local planner (used for ackermann steering / non-holonomic robots) -->
 	<arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS"/>
 
+	<arg name="motion_premitives_file" default="$(find steer_bot_navigation)/motion_premitives/map_res_05.mprim"/>
 
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 		<param name="base_global_planner" value="$(arg base_global_planner)"/>
@@ -41,7 +42,7 @@
         
         <!-- SBPL Lattice Planner params -->
  		<!-- <param name="SBPLLatticePlanner/primitive_filename" value="$(find sbpl_lattice_planner)/matlab/mprim/pr2.mprim" />  -->
- 		<param name="SBPLLatticePlanner/primitive_filename" value="$(find steer_bot_navigation)/motion_premitives/test.mprim" /> 
+ 		<param name="SBPLLatticePlanner/primitive_filename" value="$(arg motion_premitives_file)" /> 
  		
         <rosparam file="$(find steer_bot_navigation)/config/sbpl_lattice_planner_params.yaml" command="load"/>
 
