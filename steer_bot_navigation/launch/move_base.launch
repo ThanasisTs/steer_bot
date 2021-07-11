@@ -40,11 +40,14 @@
         <!-- <rosparam file="$(find steer_bot_navigation)/config/global_planner_params.yaml" command="load"/> -->
         
         <!-- SBPL Lattice Planner params -->
- 		<param name="SBPLLatticePlanner/primitive_filename" value="$(find sbpl_lattice_planner)/matlab/mprim/pr2.mprim" /> 
+ 		<!-- <param name="SBPLLatticePlanner/primitive_filename" value="$(find sbpl_lattice_planner)/matlab/mprim/pr2.mprim" />  -->
+ 		<param name="SBPLLatticePlanner/primitive_filename" value="$(find steer_bot_navigation)/motion_premitives/test.mprim" /> 
+ 		
         <rosparam file="$(find steer_bot_navigation)/config/sbpl_lattice_planner_params.yaml" command="load"/>
 
 
-		<remap from="/cmd_vel" to="/steer_bot/ackermann_steering_controller/cmd_vel"/>
+		<!-- <remap from="/cmd_vel" to="/steer_bot/ackermann_steering_controller/cmd_vel"/> -->
 	</node>
 
 </launch>
+

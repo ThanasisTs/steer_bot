@@ -1,6 +1,7 @@
 TebLocalPlannerROS:
     #odom_topic: /odometry/filtered #localization -> /odometry/filtered | perfect_odometry -> /odom_perfect
     map_frame: map
+    odom_topic: /steer_bot/groundtruth/odom
 
     # Trajectory
 
