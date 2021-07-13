@@ -36,7 +36,7 @@ default(legend = false)
 
 # Play with these based on your needs
 # ------------ From here ------------
-resolution = 0.01
+resolution = 0.05
 numberofangles = 16 # preferably a power of 2, definitely multiple of 8
 numberofprimsperangle = 5
 

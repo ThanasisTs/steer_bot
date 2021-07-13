@@ -1,6 +1,6 @@
 <launch>
 
-    <arg name="world_name" default="worlds/empty_world" />
+    <arg name="world_name" default="$(find steer_bot_gazebo)/worlds/tight_uturn.world" />
     <arg name="gui" default="true" />
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
