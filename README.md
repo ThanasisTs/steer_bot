@@ -59,10 +59,15 @@ Terminal 2:
 `roslaunch steer_bot_navigation move_base.launch map_file:=/home/thanasis/catkin_ws/src/steer_bot/steer_bot_navigation/maps/tight_maps/map_res_0.01.yaml motion_premitives_file:=/home/thanasis/catkin_ws/src/steer_bot/steer_bot_navigation/motion_premitives/map_res_0.01.mprim`
 
 If everything runs smoothly, you should see an image similar to the following in RViz.
-
 ![alt text](https://github.com/ThanasisTs/steer_bot/blob/master/steer_bot_navigation/rviz.png)
 
 To give a goal pose, select the `2D Nav Goal` and set a goal in the map.
+![alt text](https://github.com/ThanasisTs/steer_bot/blob/master/steer_bot_navigation/goal.png)
+
+Αfter that, you should see the generated path as a green line.
+![alt text](https://github.com/ThanasisTs/steer_bot/blob/master/steer_bot_navigation/path.png)
+
+**Note**: In your PC, change the `/home/thanasis/...` path in the map_file and motion_premitives_file arguements to the absolute path of the map and the motion premitives in your PC.
 
 
 
