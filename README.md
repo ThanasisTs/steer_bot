@@ -1,8 +1,5 @@
 # Steer Bot
 
-Simulate a simple Ackermann steering vehicle in Gazebo using `ros_control`
-the `ackermann_steering_controller` and `steer_bot_hardware_gazebo`.
-
 ## Installation
 
 ```bash
@@ -11,7 +8,7 @@ mkdir -p <catkin_ws>/src
 
 # Clone the repo
 cd <catkin_ws>/src
-git clone https://github.com/srmainwaring/steer_bot
+git clone https://github.com/ThanasisTs/steer_bot
 
 # Checkout a version of `steer_drive_ros` patched for ROS Melodic
 git clone https://github.com/tsedl/steer_drive_ros.git
@@ -33,43 +30,41 @@ catkin build
 
 Start the Gazebo simulation:
 
+Launch the simulation environment
 ```bash
-roslaunch steer_bot_gazebo steer_bot_sim.launch
+roslaunch steer_bot_gazebo steer_bot_sim_obstacles.launch
 ```
 
-Start `rviz`:
+Important Arguements:
+* gui: true to launch the Gazebo GUI (false otherwise, default to true)
+* teleop: true to enable teleoperation (false when used for autonomous navigation, default to false)
+
+Launch the `move_base` file for autonomous navigation!
 
 ```bash
-roslaunch steer_bot_viz view_steer_bot_robot.launch
+roslaunch steer_bot_navigation move_base.launch
 ```
 
-If all is working well you should see the robot in Gazebo and be able to
-command it using `rqt_robot_steering`:
+Important Arguements:
+* map_file: path to the map
+* motion_premitives_file: path to the motion premitives file
+**Note**: The map should be of the same resolution as the motion premitives files. Otherwise the SBPL planner won't run.
 
-![steer_gazebo rviz](https://raw.githubusercontent.com/wiki/srmainwaring/steer_bot/images/steer_bot_gazebo.png)
+Example:
 
-The robot model and odometry can be monitored in `rviz`: 
+Terminal 1:
+`roslaunch steer_bot_gazebo steer_bot_sim_obstacles.launch gui:=false`
 
-![steer_bot rviz](https://raw.githubusercontent.com/wiki/srmainwaring/steer_bot/images/steer_bot_rviz.png)
+Terminal 2:
+`roslaunch steer_bot_navigation move_base.launch map_file:=/home/thanasis/catkin_ws/src/steer_bot/steer_bot_navigation/maps/tight_maps/map_res_0.01.yaml motion_premitives_file:=/home/thanasis/catkin_ws/src/steer_bot/steer_bot_navigation/motion_premitives/map_res_0.01.mprim`
 
+If everything runs smoothly, you should see an image similar to the following in RViz.
 
-## Build Status
+![alt text](https://github.com/ThanasisTs/steer_bot/blob/master/steer_bot_navigation/rviz.png)
 
-### Develop Job Status
-
-|    | Melodic |
-|--- |--- |
-| steer_bot | [![Build Status](https://travis-ci.com/srmainwaring/steer_bot.svg?branch=develop)](https://travis-ci.com/srmainwaring/steer_bot) |
-
-
-### Release Job Status
-
-|    | Melodic |
-|--- |--- |
-| steer_bot | [![Build Status](https://travis-ci.com/srmainwaring/steer_bot.svg?branch=master)](https://travis-ci.com/srmainwaring/steer_bot) |
+To give a goal pose, select the `2D Nav Goal` and set a goal in the map.
 
 
-## License
 
-This software is licensed under the BSD-3-Clause license found in the
-LICENSE file in the root directory of this source tree.
+
+
