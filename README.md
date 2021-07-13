@@ -14,16 +14,15 @@ git clone https://github.com/ThanasisTs/steer_bot
 git clone https://github.com/tsedl/steer_drive_ros.git
 cd steer_drive_ros
 git checkout melodic-devel
-
-# Check dependencies
-rosdep check --from-paths src --ignore-src --rosdistro melodic
+cd ../../
 
 # Install dependencies
-rosdep install --from-paths src --ignore-src --rosdistro melodic -y
+rosdep install --from-paths src --ignore-src --rosdistro <ROS-DISTRO> -y
 
 # Build
 cd <catkin_ws>/src
 catkin build
+source devel/setup.bash
 ```
 
 ## Run
