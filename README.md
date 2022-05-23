@@ -18,6 +18,7 @@ cd ../../
 
 # Install dependencies
 rosdep install --from-paths src --ignore-src --rosdistro <ROS-DISTRO> -y
+sudo apt install ros-<ROS-DISTRO>-move-base ros-<ROS-DISTRO>-map-server ros-<ROS-DISTRO>-teleop-twist-keyboard
 
 # Build
 cd <catkin_ws>/src
